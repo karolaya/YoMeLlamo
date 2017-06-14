@@ -1,0 +1,57 @@
+<div class="collapse" id="exCollapsingNavbar">
+  <div class="collapse-bg p-a-1">
+    <div class='card'>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <%= link_to 'Singer', singers_path, class: "nav-link #{yield(:singer_active)}" %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to 'Song', songs_path, class: "nav-link #{yield(:songs_active)}" %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to 'Duel', duels_path, class: "nav-link #{yield(:duels_active)}" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="list-group-item">
+            <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "nav-link" %>  
+          </li>      
+        <% else %>
+          <li class="list-group-item">
+            <%= link_to 'Login', new_user_session_path , class: "nav-link"  %>  
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-light bg-faded " style="background-color: #CEF6CE;"> <!-- #E2A9F3-->
+  <div class='container'>
+    <a class='navbar-brand' href='/'>
+      Yo<span class='light'>mellamo</span>
+    </a>
+    <!--<button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+      &#9776; 
+    </button>-->
+    <ul class="nav navbar-nav pull-sm-right hidden-xs-">
+      <li class="nav-item">
+        <%= link_to 'Singer', singers_path, class: "nav-link #{yield(:singer_active)}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Song', songs_path, class: "nav-link #{yield(:songs_active)}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Duel', duels_path, class: "nav-link #{yield(:duels_active)}" %>
+      </li>
+      <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "nav-link") %>  
+          </li>      
+        <% else %>
+          <li class="nav-item">
+            <%= link_to('Login', new_user_session_path, class: "nav-link")  %>  
+          </li>
+        <% end %>
+    </ul>
+  </div>
+</nav>

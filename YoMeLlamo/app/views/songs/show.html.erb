@@ -1,0 +1,24 @@
+<% provide(:songs_active, 'active')%>
+<div class="card text-center">
+  <div class="card-header">
+    <p>
+  	<strong>Name:</strong>
+	<%= @song.name %>
+	</p>
+  </div>
+  <div class="card-block">
+    <iframe id="ytplayer" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/<%= @song.link %>" frameborder="0"></iframe>
+  </div>
+  <div class="card-footer text-muted">
+    <p>
+  		<strong>Singer:</strong>
+		<%= @song.singer_id %>
+	</p>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Edit', edit_song_path(@song) , :class => "btn btn-outline-success  btn-lg "%> |
+<%= link_to 'Back', songs_path , :class => "btn btn-outline-success  btn-lg "%>
+<br>

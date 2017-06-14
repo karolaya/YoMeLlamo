@@ -1,0 +1,61 @@
+<% provide(:duels_active, 'active')%>
+<% if user_signed_in? %>
+  <div class="col-md text-center"'>
+      <h1 class="text-center">Duels | <%= link_to 'Add', new_duel_path, :class => "btn btn-success btn-lg" %></h1> 
+  </div>
+<%else%>
+  <h1 class="text-center">Duels</h1>
+<%end%>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Singer 1</th>
+      <th>Song 1</th>
+      <% if user_signed_in? %>
+        <th>Votes 1</th>
+      <% end%>
+      <th>Singer 2</th>
+      <th>Song 2</th>
+      <% if user_signed_in? %>
+        <th>Votes 2</th>
+      <%end%>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @duels.each do |duel| %>
+      <% if user_signed_in? or !duel.finished? %>
+        <% singer1 = Singer.find(duel.singer1_id) %>
+        <% singer2 = Singer.find(duel.singer2_id)%>
+        <% song1 = Song.find(duel.song1_id) %>
+        <% song2 = Song.find(duel.song2_id) %>
+        <tr>
+          <td><%= singer1.singerName %></td>
+          <td><%= song1.name %></td>
+          <% if user_signed_in? %>
+            <td><%= duel.votes1 %></td>
+          <%end%>
+          <td><%= singer2.singerName %></td>
+          <td><%= song2.name %></td>
+          <% if user_signed_in? %>
+            <td><%= duel.votes2 %></td>
+          <%end%>
+          <td><%= link_to 'Show', duel, :class => "btn btn-outline-success" %></td>
+          <% if user_signed_in? %>
+            <td><%= link_to 'Edit', edit_duel_path(duel), :class => "btn btn-outline-info" %></td>
+            <td><%if not duel.finished? %>
+            <%= link_to 'Finish', {:controller => :duels, :action => :finishDuel, :id => duel.id}, :class => "btn btn-outline-warning" %>
+              <%end%>
+            </td>
+            <td><%= link_to 'Destroy', duel, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-outline-danger" %></td>
+          <% end %>
+        </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

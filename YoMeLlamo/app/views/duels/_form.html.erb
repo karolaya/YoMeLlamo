@@ -1,0 +1,27 @@
+<%= form_with(model: duel, local: true) do |form| %>
+  <% if duel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(duel.errors.count, "error") %> prohibited this duel from being saved:</h2>
+
+      <ul>
+      <% duel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :singer1_id %>
+    <%= form.number_field :singer1_id, id: :duel_singer1_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :singer2_id %>
+    <%= form.number_field :singer2_id, id: :duel_singer2_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

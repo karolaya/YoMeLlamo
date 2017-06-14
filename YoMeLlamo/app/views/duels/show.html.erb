@@ -1,0 +1,52 @@
+<% provide(:duels_active, 'active')%>
+<h1 class="text-center">Choose your favorite!</h1>
+
+<div class="card-deck">
+	<div class="card text-center">
+	  <div class="card-header">
+	    <p>
+	  		<strong><%= @singer1.singerName %> | <%= @song1.name %></strong>
+	  	</p>
+	  </div>
+	  <div class="card-block">
+	    <%= image_tag @singer1.avatar.url(:medium), :class=> "img-circular"%>
+	  </div>
+	  <div class="card-block">
+	    <iframe id="ytplayer" type="text/html" width="280" height="180" src="https://www.youtube.com/embed/<%= @song1.link %>" frameborder="0"></iframe>
+	  </div>
+	  <div class="card-footer text-muted">
+		<%= link_to 'Vote', {:controller => :duels, :action => :addvote, :id => @duel.id, :vote => 1}, :class => "btn btn-success btn-lg btn-block"%> 
+	  </div>
+    </div>
+
+	<div class="card text-center">
+	  <div class="card-header">
+	    <p>
+	  	<strong><%= @singer2.singerName %> | <%= @song2.name %></strong>
+	  	</p>
+	  </div>
+
+	  <div class="card-block">
+	    <%= image_tag @singer2.avatar.url(:medium), :class=> "img-circular"  %>	    
+	  </div>
+	  <div class="card-block">
+	    <iframe id="ytplayer" type="text/html" width="280" height="180" src="https://www.youtube.com/embed/<%= @song2.link %>" frameborder="0"></iframe>
+	  </div>
+	  <div class="card-footer text-muted">
+		<%= link_to 'Vote', {:controller => :duels, :action => :addvote, :id => @duel.id, :vote => 2}, :class => "btn btn-success btn-lg btn-block"%> 
+	  </div>
+	</div>
+</div>
+
+<br>
+
+<% if user_signed_in? %>
+	<h1 class="text-center">Statistics</h1>
+	<%= pie_chart [[@singer1.singerName,@duel.votes1],[@singer2.singerName,@duel.votes2]], library: {pieSliceText:
+	'value-and-percentage'}, colors: ["#F5A9BC", "purple"] %>
+	<br>
+<%end%>
+
+<div class="col-md text-center"'>
+<%= link_to 'Back', duels_path, :class => "btn btn-outline-danger btn-lg"%>
+</div>
